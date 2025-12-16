@@ -85,7 +85,7 @@ capture %>%
 # or recruitment data to see which rows actually show up there.
 
 # Anti-join example (see which capture rows have NO matching treasure data)
-anti_join(recruitment, capture, by = "id") 
+anti_join(recruitment_raw, capture, by = "id") 
 
 # It seems F032 and F087 ids are not in the capture sheet. F032 shows up in the 
 # recruitment sheet in 2017 which means that is likely the female capture at 
@@ -173,10 +173,10 @@ treasure_datum <- treasure %>%
   mutate(month = month(date), 
          year = year(date))
 
-glimpse(cap_treasure)
+glimpse(treasure_datum)
 
 # Check for NAs introduced by the join (e.g., ids in treasure not in capture)
-summary(cap_treasure)
+summary(treasure_datum)
 
 # Create yearly treasure summaries -------------------------------------------
 # I want mean and total treasure per id-year (will be useful for recruitment analysis).
@@ -210,6 +210,7 @@ recruitment_datum <- recruitment %>%
   )
 
 glimpse(recruitment_datum)
+head(recruitment_datum)
 
 # For now I’ll keep all rows (including those with missing mean_treasure or
 # offspring) and handle missingness when I summarize or model the data.
